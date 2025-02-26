@@ -1,1 +1,11 @@
 langgraph
+langchain
+langchain_groq
+langchain_community
+sendgrid
+python-dotenv
+fastapi
+uvicorn
+pydantic
+duckduckgo-search
+pydantic[email]
