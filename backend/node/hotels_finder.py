@@ -1,40 +1,35 @@
-from langchain_community.tools import DuckDuckGoSearchRun
 from langchain_core.tools import tool
+import serpapi
+import os
 
-from models.model import HotelsInputSchema
+from models.model import HotelsInputSchema, HotelsInput
 from utils.hotel_find import parse_hotel_results
 
 @tool(args_schema=HotelsInputSchema)
-def hotels_finder(params: HotelsInputSchema):
+def hotels_finder(params: HotelsInput):
     '''
-    Find hotels using DuckDuckGo search.
-    
+    Find hotels using the Google Hotels engine.
+
     Returns:
-        list: Top 5 hotel search results.
+        dict: Hotel search results.
     '''
-    
-    # Initialize DuckDuckGo search tool
-    search_tool = DuckDuckGoSearchRun()
-    
-    # Build search query
-    query = f"hotels {params.q} check in {params.check_in_date} check out {params.check_out_date} "
-    query += f"{params.adults} adults "
-    
-    if params.children and params.children > 0:
-        query += f"{params.children} children "
-    
-    if params.rooms and params.rooms > 1:
-        query += f"{params.rooms} rooms "
-    
-    if params.hotel_class:
-        stars = " ".join([f"{star}-star" for star in params.hotel_class])
-        query += f"{stars} "
-    
-    if params.sort_by and params.sort_by != "relevance":
-        query += f"sort by {params.sort_by} "
-    
-    # Execute search
-    search_results = search_tool.invoke(query)
-    hotel_results = parse_hotel_results(search_results)
-    
-    return hotel_results[:5]
+
+    params = {
+        'api_key': os.environ.get('SERPAPI_API_KEY'),
+        'engine': 'google_hotels',
+        'hl': 'en',
+        'gl': 'us',
+        'q': params.q,
+        'check_in_date': params.check_in_date,
+        'check_out_date': params.check_out_date,
+        'currency': 'USD',
+        'adults': params.adults,
+        'children': params.children,
+        'rooms': params.rooms,
+        'sort_by': params.sort_by,
+        'hotel_class': params.hotel_class
+    }
+
+    search = serpapi.search(params)
+    results = search.data
+    return results['properties'][:5]
