@@ -1,59 +1,70 @@
-# Flightpy
+# Flightpy 🛫
 
-Flightpy is a travel agent API that helps users find flights and hotels, and send travel information via email. It uses various tools and APIs to provide accurate and up-to-date information.
+A sophisticated travel agent API that seamlessly helps users discover flights, hotels, and share travel itineraries via email. Flightpy leverages cutting-edge tools and APIs to deliver accurate, real-time travel information.
 
-## **Features**
+## ✨ Key Features
 
-- **Stateful Interactions**: The agent remembers user interactions and continues from where it left off, ensuring a smooth user experience.
-- **Human-in-the-Loop**: Users have control over critical actions, like reviewing travel plans before emails are sent.
-- **Dynamic LLM Usage**: The agent intelligently switches between different LLMs for various tasks, like tool invocation and email generation.
-- **Email Automation**: Automatically generates and sends detailed travel plans to users via email.
+- **Intelligent Conversation Memory**: Flightpy remembers your previous interactions, creating a seamless and continuous experience without repetitive questions.
+- **User-Controlled Experience**: Maintains you in the decision-making loop for critical actions like finalizing travel plans before sending emails.
+- **Adaptive LLM Architecture**: Dynamically switches between specialized language models optimized for different tasks including tool interactions and email composition.
+- **Streamlined Email Communication**: Automatically generates and delivers professionally formatted travel itineraries directly to your inbox.
+- **Rich Visual Results**: Displays flight and hotel options with logos and clickable links for enhanced user experience.
 
-## Setup
+## 🚀 Getting Started
+
+### Prerequisites
+- Python 3.8 or higher
+- API keys for OpenAI, SerpAPI, and SendGrid
+- LangChain API key (for observability)
+
+### Installation
 
 1. Clone the repository:
-    ```bash
-    git clone https://github.com/rahulsamant37/Flightpy.git
-    cd Flightpy
-    ```
+   ```bash
+   git clone https://github.com/rahulsamant37/Flightpy.git
+   cd Flightpy
+   ```
 
-2. Create a virtual environment and activate it:
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-    ```
+2. Set up a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
-3. Install the required dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-4. Set up environment variables:
-    Create a `.env` file in the root directory and add the following variables:
-    ```
-    OPENAI_API_KEY=your_openai_api_key
-    SERPAPI_API_KEY=your_serpapi_api_key
-    SENDGRID_API_KEY=your_sendgrid_api_key
+4. Configure environment variables:
+   Create a `.env` file in the project root with the following:
+   ```
+   # API Keys
+   OPENAI_API_KEY=your_openai_api_key
+   SERPAPI_API_KEY=your_serpapi_api_key
+   SENDGRID_API_KEY=your_sendgrid_api_key
 
-    # Observability variables
-    LANGCHAIN_API_KEY=your_langchain_api_key
-    LANGCHAIN_TRACING_V2=true
-    LANGCHAIN_PROJECT=ai_travel_agent
-    ```
+   # Observability Configuration
+   LANGCHAIN_API_KEY=your_langchain_api_key
+   LANGCHAIN_TRACING_V2=true
+   LANGCHAIN_PROJECT=ai_travel_agent
+   ```
 
-## Usage
+## 💻 Usage
 
-1. Run the FastAPI server:
-    ```bash
-    uvicorn backend.main:app --reload
-    ```
+### Starting the Services
 
-2. Access the API documentation at `http://127.0.0.1:8000/docs`.
+1. Launch the FastAPI backend:
+   ```bash
+   uvicorn backend.main:app --reload
+   ```
 
-3. To start the chatbot, run the following command:
-```
-streamlit run app.py
-```
+2. Launch the Streamlit chatbot interface:
+   ```bash
+   streamlit run app.py
+   ```
+
+3. Access API documentation at `http://127.0.0.1:8000/docs`
 
 ### Using the Chatbot
 Once launched, simply enter your travel request. For example:
@@ -71,9 +82,9 @@ The chatbot will generate results that include logos and links for easy navigati
 
 - Flight and hotel options with relevant logos and links for easy reference:
 
-![photo2](https://github.com/user-attachments/assets/741e010c-22cf-4d31-a518-441b076ec58f)
+![photo2](https://github.com/rahulsamant37/Flightpy/blob/main/assets/Flight_Result.png)
 
-![photo3](https://github.com/user-attachments/assets/a29173c7-852d-41ab-b3fe-94e6cca83c78)
+![photo3](https://github.com/rahulsamant37/Flightpy/blob/main/assets/Hotel_Result.png)
 
 
 #### Email Integration
@@ -85,19 +96,34 @@ The email integration is implemented using the **human-in-the-loop** feature, al
 ![photo5](https://github.com/rahulsamant37/Flightpy/blob/main/assets/Four-Star%20Hotel%20Options%20in%20Amsterdam%20(March%201-7%2C%202025)%20(1).png)
 ![photo6](https://github.com/rahulsamant37/Flightpy/blob/main/assets/Four-Star%20Hotel%20Options%20in%20Amsterdam%20(March%201-7%2C%202025).png)
 
+## 🔌 API Endpoints
 
-## Endpoints
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/` | GET | Health check endpoint |
+| `/query` | POST | Process natural language travel queries |
+| `/search/flights` | POST | Search for flights using specific criteria |
+| `/search/hotels` | POST | Search for hotels using specific criteria |
+| `/email` | POST | Send travel information via email |
 
-- `GET /` - Health check endpoint
-- `POST /query` - Process a natural language travel query
-- `POST /search/flights` - Search for flights using specific criteria
-- `POST /search/hotels` - Search for hotels using specific criteria
-- `POST /email` - Send travel information via email
+## 🤝 Contributing
 
-## Contributing
+Contributions are welcome and appreciated! To contribute:
 
-Contributions are welcome! Please open an issue or submit a pull request for any changes.
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## License
+## 📄 License
 
-This project is licensed under the MIT License.
+This project is licensed under the GNU General Public License - see the LICENSE file for details.
+
+## 📊 Data Sources
+
+All travel data is fetched via Google Flights and Google Hotels APIs. Flightpy has no affiliation with any travel provider and does not promote any particular brand.
+
+---
+
+**Note**: Flightpy is a demonstration project and not intended for production use without further security and optimization enhancements.
