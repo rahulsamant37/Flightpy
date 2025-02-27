@@ -1,11 +1,11 @@
 langgraph
 langchain
-langchain_groq
+langchain_openai
 langchain_community
 sendgrid
 python-dotenv
 fastapi
 uvicorn
 pydantic
-duckduckgo-search
-pydantic[email]
+google-search-results
+serpapi
